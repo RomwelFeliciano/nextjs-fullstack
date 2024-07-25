@@ -30,12 +30,16 @@ const SinglePostPage = async ({ params }) => {
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
-        <Image
-          src='https://images.pexels.com/photos/1122411/pexels-photo-1122411.jpeg?auto=compress&cs=tinysrgb&w=600'
-          alt=''
-          fill
-          className={styles.img}
-        />
+        {post.img ? (
+          <Image src={post.img} alt='' fill className={styles.img} />
+        ) : (
+          <Image
+            src='https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            alt=''
+            fill
+            className={styles.img}
+          />
+        )}
       </div>
 
       <div className={styles.textContainer}>
@@ -48,10 +52,12 @@ const SinglePostPage = async ({ params }) => {
           )}
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
-            <span className={styles.detailValue}>01.01.2024</span>
+            <span className={styles.detailValue}>
+              {post.createdAt.toString().slice(4, 16)}
+            </span>
           </div>
         </div>
-        <div className={styles.content}>{post.body}</div>
+        <div className={styles.content}>{post.desc}</div>
       </div>
     </div>
   );

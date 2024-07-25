@@ -21,6 +21,13 @@ const BlogPage = async () => {
   // FETCHING DATA WITHOUT AN API
   const posts = await getPosts();
 
+  if (posts.length < 1) {
+    return (
+      <div className={styles.container}>
+        <h1 className={styles.empty}>No Posts</h1>
+      </div>
+    );
+  }
   return (
     <div className={styles.container}>
       {posts.map((post) => (
