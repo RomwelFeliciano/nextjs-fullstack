@@ -5,17 +5,17 @@ import PostUser from '@/components/postUser/PostUser';
 import { getPost } from '@/lib/data';
 
 // FETCHING DATA WITH AN API
-const getData = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
-    next: { revalidate: 3600 }, //refresh data every hour
-  });
+// const getData = async (slug) => {
+//   const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
+//     next: { revalidate: 3600 }, //refresh data every hour
+//   });
 
-  if (!res.ok) {
-    throw new Error('Something went wrong!');
-  }
+//   if (!res.ok) {
+//     throw new Error('Something went wrong!');
+//   }
 
-  return res.json();
-};
+//   return res.json();
+// };
 
 export const generateMetadata = async ({ params }) => {
   const { slug } = params;
@@ -29,9 +29,9 @@ export const generateMetadata = async ({ params }) => {
 const SinglePostPage = async ({ params }) => {
   const { slug } = params;
 
-  const post = await getData(slug);
+  // const post = await getData(slug);
 
-  // const post = await getPost(slug);
+  const post = await getPost(slug);
 
   return (
     <div className={styles.container}>

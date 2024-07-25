@@ -3,27 +3,27 @@ import styles from './blog.module.css';
 import { getPosts } from '@/lib/data';
 
 // FETCHING DATA WITH AN API
-const getData = async () => {
-  const res = await fetch('http://localhost:3000/api/blog', {
-    next: { revalidate: 3600 }, //refresh data every hour
-  });
+// const getData = async () => {
+//   const res = await fetch('http://localhost:3000/api/blog', {
+//     next: { revalidate: 3600 }, //refresh data every hour
+//   });
 
-  if (!res.ok) {
-    throw new Error('Something went wrong!');
-  }
+//   if (!res.ok) {
+//     throw new Error('Something went wrong!');
+//   }
 
-  return res.json();
-};
-export const metadata = {
-  title: 'Blog Page',
-  description: 'Blog description',
-};
+//   return res.json();
+// };
+// export const metadata = {
+//   title: 'Blog Page',
+//   description: 'Blog description',
+// };
 
 const BlogPage = async () => {
-  const posts = await getData();
+  // const posts = await getData();
 
   // FETCHING DATA WITHOUT AN API
-  // const posts = await getPosts();
+  const posts = await getPosts();
 
   if (posts.length < 1) {
     return (
