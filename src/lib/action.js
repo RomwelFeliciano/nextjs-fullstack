@@ -63,8 +63,6 @@ export const handleRegister = async (previousState, formData) => {
   const { username, email, password, img, confirmPassword } =
     Object.fromEntries(formData);
 
-  console.log(formData);
-
   if (password !== confirmPassword) {
     // return 'Passwords do not match!';
     // throw  new Error("Passwords do not match!") But Not a good Idea

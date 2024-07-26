@@ -1,6 +1,7 @@
 import { handleGithubLogin } from '@/lib/action';
 import LoginForm from '@/components/loginForm/LoginForm';
 import styles from './login.module.css';
+import { auth } from '@/lib/auth';
 
 export const metadata = {
   title: 'Login Page',
@@ -8,6 +9,7 @@ export const metadata = {
 };
 
 const LoginPage = () => {
+  // auth?.user?.isAdmin && router.push('/')
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
