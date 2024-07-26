@@ -3,7 +3,9 @@
 import { revalidatePath } from 'next/cache';
 import { Post } from './models';
 import { connectToDb } from './utils';
+import { signIn, signOut } from './auth';
 
+// Add Post Data
 export const addPost = async (formData) => {
   //   const title = formData.get('title');
   //   const description = formData.get('description');
@@ -29,6 +31,7 @@ export const addPost = async (formData) => {
   }
 };
 
+// Delete Post Data
 export const deletePost = async (formData) => {
   const { id } = Object.fromEntries(formData);
 
@@ -42,4 +45,16 @@ export const deletePost = async (formData) => {
     console.log(err);
     return { error: 'Something went wrong!' };
   }
+};
+
+// Github Login
+export const handleGithubLogin = async () => {
+  'use server';
+  await signIn('github');
+};
+
+// Logout
+export const handleLogout = async () => {
+  'use server';
+  await signOut('github');
 };

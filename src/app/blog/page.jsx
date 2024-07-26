@@ -4,7 +4,7 @@ import { getPosts } from '@/lib/data';
 
 // FETCHING DATA WITH AN API
 const getData = async () => {
-  const res = await fetch('https://nextjsfullstack-template.netlify.app/blog', {
+  const res = await fetch('http://localhost:3000/api/blog', {
     next: { revalidate: 3600 }, //refresh data every hour
   });
 

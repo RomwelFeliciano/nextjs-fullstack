@@ -6,12 +6,9 @@ import { getPost } from '@/lib/data';
 
 // FETCHING DATA WITH AN API
 const getData = async (slug) => {
-  const res = await fetch(
-    `https://nextjsfullstack-template.netlify.app/blog/${slug}`,
-    {
-      next: { revalidate: 3600 }, //refresh data every hour
-    }
-  );
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
+    next: { revalidate: 3600 }, //refresh data every hour
+  });
 
   if (!res.ok) {
     throw new Error('Something went wrong!');
