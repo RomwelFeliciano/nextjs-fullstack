@@ -59,14 +59,16 @@ export const handleLogout = async () => {
 };
 
 // Register User
-export const handleRegister = async (formData) => {
+export const handleRegister = async (previousState, formData) => {
   const { username, email, password, img, confirmPassword } =
     Object.fromEntries(formData);
 
   console.log(formData);
 
   if (password !== confirmPassword) {
-    return 'Passwords do not match!';
+    // return 'Passwords do not match!';
+    // throw  new Error("Passwords do not match!") But Not a good Idea
+    return { error: 'Passwords do not match!' };
   }
 
   try {
@@ -74,7 +76,8 @@ export const handleRegister = async (formData) => {
     const user = await User.findOne({ username });
 
     if (user) {
-      return 'User already exist!';
+      // return 'User already exist!';
+      return { error: 'User already exist!' };
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -89,6 +92,8 @@ export const handleRegister = async (formData) => {
 
     await newUser.save();
     console.log('saved to db');
+
+    return { success: true };
   } catch (err) {
     console.log(err);
     return { error: 'Something went wrong!' };
@@ -96,12 +101,16 @@ export const handleRegister = async (formData) => {
 };
 
 // Login User
-export const handleLogin = async (formData) => {
+export const handleLogin = async (previousState, formData) => {
+  //Previous State is needed when using useFormState Hook
   const { username, password } = Object.fromEntries(formData);
   try {
     await signIn('credentials', { username, password });
   } catch (err) {
     console.log(err);
-    return { error: 'Something went wrong!' };
+    if (err.message.includes('CredentialsSignin')) {
+      return { error: 'Invalid username or password!' };
+    }
+    throw err;
   }
 };

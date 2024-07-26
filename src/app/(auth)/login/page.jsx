@@ -1,4 +1,5 @@
-import { handleGithubLogin, handleLogin } from '@/lib/action';
+import { handleGithubLogin } from '@/lib/action';
+import LoginForm from '@/components/loginForm/LoginForm';
 import styles from './login.module.css';
 
 export const metadata = {
@@ -8,15 +9,13 @@ export const metadata = {
 
 const LoginPage = () => {
   return (
-    <div>
-      <form action={handleGithubLogin}>
-        <button>Login with Github</button>
-      </form>
-      <form action={handleLogin}>
-        <input type='text' placeholder='username' name='username' />
-        <input type='text' placeholder='password' name='password' />
-        <button>Login</button>
-      </form>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <form action={handleGithubLogin}>
+          <button className={styles.github}>Login with Github</button>
+        </form>
+        <LoginForm />
+      </div>
     </div>
   );
 };
