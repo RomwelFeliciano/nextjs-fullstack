@@ -40,9 +40,6 @@ export const authConfig = {
       }
 
       return true;
-
-      console.log(auth);
-      return true;
     },
   },
 };
