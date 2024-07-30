@@ -9,26 +9,21 @@ import { authConfig } from './auth.config';
 const login = async (credentials) => {
   try {
     connectToDb();
-
     const user = await User.findOne({ username: credentials.username });
 
-    if (!user) {
-      throw new Error('Wrong Credentials!');
-    }
+    if (!user) throw new Error('Wrong credentials!');
 
     const isPasswordCorrect = await bcrypt.compare(
       credentials.password,
       user.password
     );
 
-    if (!isPasswordCorrect) {
-      throw new Error('Wrong Credentials!');
-    }
+    if (!isPasswordCorrect) throw new Error('Wrong credentials!');
 
     return user;
-  } catch (error) {
-    console.log(error);
-    throw new Error('Failed to login');
+  } catch (err) {
+    console.log(err);
+    throw new Error('Failed to login!');
   }
 };
 
@@ -49,7 +44,7 @@ export const {
         try {
           const user = await login(credentials);
           return user;
-        } catch (error) {
+        } catch (err) {
           return null;
         }
       },
@@ -57,7 +52,6 @@ export const {
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      // console.log(user, account, profile);
       if (account.provider === 'github') {
         connectToDb();
         try {
@@ -69,10 +63,11 @@ export const {
               email: profile.email,
               image: profile.avatar_url,
             });
+
             await newUser.save();
           }
-        } catch (error) {
-          console.log(error);
+        } catch (err) {
+          console.log(err);
           return false;
         }
       }
