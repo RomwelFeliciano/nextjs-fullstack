@@ -2,6 +2,9 @@ export const authConfig = {
   pages: {
     signIn: '/login',
   },
+  session: {
+    jwt: true,
+  },
   providers: [],
   callbacks: {
     // FOR MORE DETAIL ABOUT CALLBACK FUNCTIONS CHECK https://next-auth.js.org/configuration/callbacks
