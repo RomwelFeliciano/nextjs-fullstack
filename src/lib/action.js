@@ -95,7 +95,7 @@ export const handleGithubLogin = async () => {
 
 // Logout
 export const handleLogout = async () => {
-  await signOut();
+  await signOut({ redirectTo: '/login' });
 };
 
 // Register User
