@@ -39,7 +39,7 @@ const Links = ({ session }) => {
             {session.user.isAdmin && (
               <NavLink item={{ title: 'Admin', path: '/admin' }} />
             )}
-            <form onSubmit={handleLogout}>
+            <form action={handleLogout}>
               <button type='submit' className={styles.logout}>
                 Logout
               </button>
