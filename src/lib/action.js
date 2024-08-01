@@ -139,11 +139,17 @@ export const handleRegister = async (previousState, formData) => {
 };
 
 // Login User
-export const handleLogin = async (previousState, formData) => {
+export const handleLogin = async (formData) => {
   //Previous State is needed when using useFormState Hook
   const { username, password } = Object.fromEntries(formData);
   try {
-    await signIn('credentials', { username, password });
+    const response = await signIn('credentials', {
+      username,
+      password,
+      redirect: false,
+    });
+    revalidatePath('/');
+    return response;
   } catch (err) {
     console.log(err);
     if (err.message.includes('CredentialsSignin')) {
