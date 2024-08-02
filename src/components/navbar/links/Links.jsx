@@ -30,7 +30,7 @@ const Links = ({ session }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSignOut = () => {
-    signOut({ callbackUrl: '/' }); // Redirect to home page or any desired URL after sign out
+    signOut({ callbackUrl: '/login' }); // Redirect to home page or any desired URL after sign out
   };
 
   return (

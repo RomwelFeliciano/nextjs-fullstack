@@ -27,6 +27,8 @@ export const authConfig = {
       const isOnAdminPanel = request.nextUrl?.pathname.startsWith('/admin');
       const isOnBlogPage = request.nextUrl?.pathname.startsWith('/blog');
       const isOnLoginPage = request.nextUrl?.pathname.startsWith('/login');
+      const isOnRegisterPage =
+        request.nextUrl?.pathname.startsWith('/register');
 
       // ONLY ADMIN CAN REACH THE ADMIN DASHBOARD
 
@@ -42,7 +44,7 @@ export const authConfig = {
 
       // ONLY UNAUTHENTICATED USERS CAN REACH THE LOGIN PAGE
 
-      if (isOnLoginPage && user) {
+      if ((isOnLoginPage || isOnRegisterPage) && user) {
         return Response.redirect(new URL('/', request.nextUrl));
       }
 
