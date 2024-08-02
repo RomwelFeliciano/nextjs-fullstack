@@ -5,6 +5,7 @@ import styles from './links.module.css';
 import NavLink from './navLink/NavLink';
 import Image from 'next/image';
 import { handleLogout } from '../../../lib/action';
+import { signOut } from 'next-auth/react';
 
 const links = [
   {
@@ -28,6 +29,10 @@ const links = [
 const Links = ({ session }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/' }); // Redirect to home page or any desired URL after sign out
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.links}>
@@ -44,6 +49,7 @@ const Links = ({ session }) => {
                 Logout
               </button>
             </form>
+            <button onClick={handleSignOut}>Sign Out</button>
           </>
         ) : (
           <NavLink item={{ title: 'Login', path: '/login' }} />
