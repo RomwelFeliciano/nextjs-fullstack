@@ -28,23 +28,6 @@ const links = [
 const Links = ({ session }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSignOut = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await handleLogout();
-
-      if (response?.error) {
-        console.error(response.error);
-      } else {
-        // Manually clear the cookies
-        Cookies.remove('__Secure-authjs.session-token'); // Adjust the cookie name based on your setup
-        router.push('/login');
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.links}>
@@ -56,7 +39,7 @@ const Links = ({ session }) => {
             {session.user.isAdmin && (
               <NavLink item={{ title: 'Admin', path: '/admin' }} />
             )}
-            <form onSubmit={handleSignOut}>
+            <form action={handleLogout}>
               <button type='submit' className={styles.logout}>
                 Logout
               </button>

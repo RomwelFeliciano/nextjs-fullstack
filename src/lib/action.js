@@ -3,7 +3,8 @@
 import { revalidatePath } from 'next/cache';
 import { Post, User } from './models';
 import { connectToDb } from './utils';
-import { signIn, signOut } from './auth';
+import { signIn } from './auth';
+import { signOut } from 'next-auth/react';
 import bcrypt from 'bcryptjs';
 
 // Add Post Data
@@ -95,7 +96,7 @@ export const handleGithubLogin = async () => {
 
 // Logout
 export const handleLogout = async () => {
-  await signOut({ redirectTo: '/login' });
+  await signOut();
 };
 
 // Register User
